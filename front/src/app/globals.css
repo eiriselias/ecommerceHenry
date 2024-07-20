@@ -3,3 +3,17 @@
 @tailwind utilities;
 
 
+:root{
+    --primario-color:#10B981;
+    --secundario-color: #3B82F6;
+    --terciario-color: #EDE9FE;
+    --cuarternario-color: #374151;
+}
+
+.containerFormulario{
+    display: flex;
+    background-color: var(--cuarternario-color);
+    width: 50%;
+    height: 80vh;
+    border-radius: 0 0 2rem 2rem;
+}
