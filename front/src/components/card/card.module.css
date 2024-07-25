@@ -1,0 +1,8 @@
+.container{
+   background-color: beige;
+   width: 80%;
+   height: 30rem;
+   margin-bottom: 2rem;
+   border-radius: 0 1rem 0 1rem;
+   overflow: hidden;
+}

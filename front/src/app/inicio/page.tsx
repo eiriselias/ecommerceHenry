@@ -1,8 +1,8 @@
 //React
 import React from 'react'
 
-//componentes
-import NavBar from '@/components/navBar/navBar';
+//stiles
+import styles from "./inicio.module.css"
 
 //next
 import Image from 'next/image';

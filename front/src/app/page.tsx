@@ -1,8 +1,11 @@
 import CardList from "@/components/cardList/cardList";
-import NavBar from "@/components/navBar/navBar";
+import Categorias from "@/components/categorias/categorias";
+
 export default function Home() {
   return (
-    <div>
-    </div>
+    <>
+      <Categorias/>
+      <CardList/>
+    </>
   );
 }

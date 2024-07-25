@@ -16,4 +16,18 @@
     width: 50%;
     height: 80vh;
     border-radius: 0 0 2rem 2rem;
+
+    animation-name: ver;
+    animation-duration: 3s;
+}
+
+@keyframes ver{
+    0%{
+        transform: translateY(-500px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
 }
