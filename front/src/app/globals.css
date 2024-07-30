@@ -10,6 +10,10 @@
     --cuarternario-color: #374151;
 }
 
+.navListStyles{
+    @apply hover:scale-110 md:hover:scale-125 text-sm md:text-lg
+}
+
 .containerFormulario{
     display: flex;
     background-color: var(--cuarternario-color);
@@ -19,6 +23,7 @@
 
     animation-name: ver;
     animation-duration: 3s;
+    
 }
 
 @keyframes ver{
