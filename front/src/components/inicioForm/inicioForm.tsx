@@ -1,7 +1,9 @@
 'use client'
+import { validateLoginForm } from "@/helpers/validate"
+import { ILoginErrors, ILoginProps } from "@/types/ITypes"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const InicioForm = () => {
 
@@ -10,7 +12,9 @@ const InicioForm = () => {
         password:""
     }
 
-    const [dataUser, setDataUser] = useState(initialState);
+    const [dataUser, setDataUser] = useState<ILoginProps>(initialState);
+    const [errors, setErrors] = useState<ILoginErrors>(initialState);
+    const [isDisabled, setIsDisabled] = useState(true)
 
     const handelChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         const {name, value} = e.target;
@@ -25,6 +29,16 @@ const InicioForm = () => {
         alert("se envio el formulario")
     }
 
+    useEffect(()=>{
+        const errors = validateLoginForm(dataUser)
+        setErrors(errors)
+
+        //verifica que los campos requeridos esten llenos para habilitar el boton de submit
+        const allFilled = Object.values(dataUser).every(field => field.trim() !== '');
+        setIsDisabled(!allFilled);
+
+    },[dataUser])
+
     return (
         <div className='flex justify-center'>
             <div className='containerFormulario flex flex-col pt-8 items-center shadow-ps relative'>
@@ -37,18 +51,31 @@ const InicioForm = () => {
                         placeholder='Correo Electronico' 
                         value={dataUser.email}
                         onChange={handelChange}
-                        className='mb-8 p-1 w-full rounded-lg hover:shadow-ps focus:shadow-ps transition-all' 
-                        
+                        className='p-1 w-full rounded-lg hover:shadow-ps focus:shadow-ps transition-all' 
+                        required
                     />
+                    {
+                        errors.email && <span className="text-red-400 mt-2">{errors.email}</span>
+                    }
                     <input 
                         type="password" 
                         name="password" 
                         placeholder='Contraseña' 
                         value={dataUser.password}
                         onChange={handelChange}
-                        className='mb-8 p-1 w-full rounded-lg hover:shadow-ps focus:shadow-ps transition-all' 
+                        className='mt-8 p-1 w-full rounded-lg hover:shadow-ps focus:shadow-ps transition-all' 
+                        required
                     />
-                    <button type="submit" className='bg-green-500 py-2 px-8 rounded-full hover:shadow-ps hover:scale-110 transition-all'>Ingresar</button>
+                    {
+                        errors.password && <span className="text-red-400 mt-2">{errors.password}</span>
+                    }
+                    <button 
+                        type="submit" 
+                        disabled={isDisabled}
+                        className='bg-green-500 py-2 px-8 rounded-full hover:shadow-ps hover:scale-110 transition-all mt-8 
+                                    disabled:hover:scale-100 disabled:hover:shadow-none disabled:opacity-10'>
+                            Ingresar
+                    </button>
                     <span className='self-end justify-self-end text-white absolute bottom-4 right-8 cursor-pointer hover:scale-110 transition-all'><Link href="/registrarse">Registrarse</Link></span>
                 </form>
             </div>
