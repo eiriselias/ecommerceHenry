@@ -1,5 +1,5 @@
 .container{
-   background-color: beige;
+   background-color:var(--terciario-color);
    width: 80%;
    height: 30rem;
    margin-bottom: 2rem;
