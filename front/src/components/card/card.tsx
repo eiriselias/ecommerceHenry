@@ -6,7 +6,7 @@ const Card: React.FC <IProduct> = ({ name, price, description, image, stock })=>
 
     return(
         <div className={`shadow-ps relative ${styles.container}`}>
-            <div className="w-full h-2/5 relative text-center cursor-pointer">
+            <div className="w-full h-2/5 relative text-center">
                 <h2 className="bg-green-400 p-2 uppercase">{name}</h2>
                 <Image 
                     className="mt-10"
@@ -22,15 +22,6 @@ const Card: React.FC <IProduct> = ({ name, price, description, image, stock })=>
                         <p className="font-bold mt-2">precio: {price} </p>
                         <p className="font-bold">disponibles: {stock}</p>
                     </div>
-                    <div className="self-end absolute right-4 bottom-3 cursor-pointer">
-                        <Image 
-                            src="./cartAdd.svg"
-                            alt="agregar al carrito"
-                            width={30}
-                            height={30}
-                        />
-                    </div>
-                    
                 </div>
             </div>
         </div>

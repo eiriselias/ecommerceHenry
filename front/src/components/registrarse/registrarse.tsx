@@ -43,7 +43,7 @@ const RegistrarseForm = () => {
 
   return (
     <>
-       <div className='flex justify-center'>
+       <div className='flex justify-center mt-16'>
             <div className='containerFormulario flex flex-col pt-8 items-center shadow-ps relative'>
                 
                 <form onSubmit={handelSubmit} className='flex flex-col  items-center w-3/5'>

@@ -40,7 +40,7 @@ const InicioForm = () => {
     },[dataUser])
 
     return (
-        <div className='flex justify-center'>
+        <div className='flex justify-center mt-16'>
             <div className='containerFormulario flex flex-col pt-8 items-center shadow-ps relative'>
                 <Image src="./logoIngreso.svg" width={200} height={200} alt='logo de ingreso' />
                 <form className='flex flex-col  items-center w-3/5' onSubmit={handelSubmit}>

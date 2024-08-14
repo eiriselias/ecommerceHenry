@@ -1,23 +1,23 @@
 import React from 'react'
 import Card from '@/components/card/card';
 import IProduct from '@/types/IProduct';
+import { getProducts } from '@/helpers/products.helpers';
+import Link from 'next/link';
 
-export const fetchProducts = async ()=>{
-    const res = await fetch("http://localhost:3030/products");
-    const products = await res.json();
-    return products;
-}
+
 
 const Products = async () => {
-    const fetchData = await fetchProducts()
+  const products = await getProducts()
 
 
   return (
-    <div className='grid grid-cols-4 justify-items-center mt-20'>
+    <div className='grid grid-cols-4 justify-items-center mt-28'>
         {
-        fetchData.map((prod: IProduct)=>{
+          products && products?.map((prod: IProduct)=>{
             return(
-                <Card key={prod.id} {...prod}/>
+                <Link className='flex justify-center opacity-70 hover:opacity-100 transition-all hover:scale-105' href={`/products/${prod.id}`} key={prod.id}>
+                  <Card key={prod.id} {...prod}/>
+                </Link>
             )
         })
       }
