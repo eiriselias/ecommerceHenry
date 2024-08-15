@@ -41,7 +41,7 @@ const InicioForm = () => {
         }
         localStorage.setItem("userSession", JSON.stringify({token, userData: clearUser}))
         alert("has iniciado seccion");
-        router.push("/")
+        router.push("/products")
     }
 
     useEffect(()=>{
