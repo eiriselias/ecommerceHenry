@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { IRegisterErrors, IRegisterProps } from '@/types/ITypes';
 import { validateRegisterForm } from '@/helpers/validate';
+import { register } from '@/helpers/auth.helpers';
+import { useRouter } from 'next/navigation';
 
 const RegistrarseForm = () => {
-
+  const router = useRouter();
   const initialState = {
     name: "",
     email: "",
@@ -27,9 +29,11 @@ const RegistrarseForm = () => {
     })
   }
 
-  const handelSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
+  const handelSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
-    alert("se envio el formulario")
+    await register(dataUser)
+    alert("Registro completado correctamente")
+    router.push("/inicio")
   }
 
   useEffect(()=>{

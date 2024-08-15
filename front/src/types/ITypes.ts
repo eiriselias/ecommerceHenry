@@ -25,3 +25,15 @@ export interface IRegisterErrors{
     password?: string,
     passwordConfirm?: string
 }
+
+export interface IUserSession{
+    token: string,
+    userData:{
+        id: number,
+        address: string,
+        email: string,
+        name: string, 
+        phone: string,
+        orders: []
+    }
+}

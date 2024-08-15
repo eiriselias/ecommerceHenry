@@ -1,12 +1,15 @@
 'use client'
+import { login } from "@/helpers/auth.helpers"
 import { validateLoginForm } from "@/helpers/validate"
 import { ILoginErrors, ILoginProps } from "@/types/ITypes"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const InicioForm = () => {
 
+    const router = useRouter()
     const initialState = {
         email: "",
         password:""
@@ -24,9 +27,21 @@ const InicioForm = () => {
         })
     }
 
-    const handelSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
+    const handelSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        alert("se envio el formulario")
+        const response = await login(dataUser)
+        const {token, user} = response;
+        const clearUser = {
+            id: user.id,
+            name: user.name,
+            address: user.address,
+            phone: user.phone,
+            email: user.email,
+            orders: user.orders
+        }
+        localStorage.setItem("userSession", JSON.stringify({token, userData: clearUser}))
+        alert("has iniciado seccion");
+        router.push("/")
     }
 
     useEffect(()=>{
