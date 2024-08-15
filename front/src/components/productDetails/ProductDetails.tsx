@@ -1,10 +1,53 @@
+'use client'
 import IProduct from '@/types/IProduct'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { IUserSession } from '@/types/ITypes'
+import { useRouter } from 'next/navigation'
 
-const ProductDetails = ({id, name, description, price, stock, image}: IProduct) => {
+const ProductDetails = ({id, name, description, price, stock, image, categoryId}: IProduct) => {
+  const router = useRouter()
+  const [userSession, setUserSession] = useState<IUserSession>()
 
+  useEffect(()=>{
+    const localUser = localStorage.getItem("userSession")
+    setUserSession(JSON.parse(localUser!))
+  },[])
+
+  const handleAdd = ()=>{
+
+    if(!userSession?.token){
+      alert("Debe haber un inicio de sección para agregar al carrito");
+      router.push("/inicio");
+    }else{
+      const cart: IProduct[] = JSON.parse(localStorage.getItem("cart") || "[]")
+      const productExist = cart.some((prod: IProduct)=>{
+        if(prod.id === id) return true
+        return false
+      })
+      if(productExist){
+        alert("Este producto ya existe en tu carro de compras")
+        router.push("/carrito")
+      }else{
+        cart.push({
+          id,
+          name, 
+          description,
+          price,
+          stock,
+          image,
+          categoryId
+        })
+        console.log(cart);
+        
+        localStorage.setItem("cart", JSON.stringify(cart))
+        alert("producto agregado con exito")
+        router.push("/carrito")
+      }
+    }
+  }
     
   return (
     <div className="flex justify-center">
@@ -20,7 +63,7 @@ const ProductDetails = ({id, name, description, price, stock, image}: IProduct) 
                 <p>presio: ${price}</p>
                 <p>disponible: {stock}</p>
               </div>
-              <Link className='z-10 self-end hover:scale-110 hover:bg-green-500 hover:p-2 hover:rounded-md transition-all' href="/carrito">
+              <button onClick={handleAdd} className='z-10 self-end hover:scale-110 hover:bg-green-500 hover:p-2 hover:rounded-md transition-all'>
                 <div className='flex flex-col items-center'>
                   <Image 
                     src="/cartAdd.svg"
@@ -30,7 +73,7 @@ const ProductDetails = ({id, name, description, price, stock, image}: IProduct) 
                   />
                   <p>Agregar al carrito</p>
                 </div>
-              </Link>
+              </button>
             </div>
           <div className='bg-blue-200 absolute top-0 left-0 w-full h-full opacity-90'></div>
         </div>
