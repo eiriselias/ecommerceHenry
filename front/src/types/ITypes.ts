@@ -1,3 +1,5 @@
+import IProduct from "./IProduct"
+
 export interface ILoginProps{
     email: string,
     password: string
@@ -36,4 +38,11 @@ export interface IUserSession{
         phone: string,
         orders: []
     }
+}
+
+export interface IOrder{
+    id: number,
+    status: string,
+    date: Date,
+    products: IProduct[]
 }

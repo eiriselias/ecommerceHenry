@@ -3,15 +3,17 @@ import { IUserSession } from '@/types/ITypes'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 
 const NavBar:React.FC = () => {
   const [userSession, setUserSession] = useState<IUserSession>()
+  const pathname = usePathname()
 
   useEffect(()=>{
     const localUser = localStorage.getItem("userSession")
     setUserSession(JSON.parse(localUser!))
-  },[])
+  },[pathname])
 
   const handleClose = ()=>{
     localStorage.clear()
@@ -29,7 +31,8 @@ const NavBar:React.FC = () => {
           userSession?.token ? (
             <>
             <li className='navListStyles'><Link href="/carrito">Carrito</Link></li>
-            <li className='navListStyles'><Link href="/products">
+            <li className='navListStyles'><Link href="/orders">Ordenes</Link></li>
+            <li className='navListStyles'><Link href="/">
               <div onClick={handleClose} className='flex gap-2 mr-8'>
                 <div>
                   <Image src="./logoIngreso.svg" width={30} height={30} alt='logo de ingreso' />

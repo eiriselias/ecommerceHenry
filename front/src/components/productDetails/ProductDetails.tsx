@@ -40,7 +40,6 @@ const ProductDetails = ({id, name, description, price, stock, image, categoryId}
           image,
           categoryId
         })
-        console.log(cart);
         
         localStorage.setItem("cart", JSON.stringify(cart))
         alert("producto agregado con exito")

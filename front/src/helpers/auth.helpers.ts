@@ -42,7 +42,7 @@ export async function login (userData: ILoginProps){
         }
 
     } catch (error: any){
-        throw new Error(error)
+        alert("usuario o contraseña no concide con usuario registrado")
         
     }
     

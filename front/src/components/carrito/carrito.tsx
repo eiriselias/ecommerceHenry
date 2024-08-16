@@ -3,11 +3,21 @@ import React, { useEffect, useState } from 'react'
 import MiniCard from '../miniCard/MiniCard'
 import IProduct from '@/types/IProduct'
 import Link from 'next/link'
+import { createOrders } from '@/helpers/orders.helpers'
+import { IUserSession } from '@/types/ITypes'
+import { useRouter } from 'next/navigation'
 
 const CompCarrito = () => {
     
     const [total, setTotal] = useState <number> (0)
     const [producto, setProdcuto] = useState<IProduct[]>([])
+    const [userSession, setUserSession] = useState<IUserSession>()
+    const router = useRouter()
+
+    useEffect(()=>{
+        const localUser = localStorage.getItem("userSession")
+        setUserSession(JSON.parse(localUser!))
+    },[])
 
     useEffect(()=>{
         const cart:  IProduct[] = JSON.parse(localStorage.getItem("cart") || "[]")
@@ -20,6 +30,18 @@ const CompCarrito = () => {
             setProdcuto(cart)
         }
     },[])
+
+    const handleCompra = async ()=>{
+        const idProducts = producto.map((prod)=> prod.id)
+        await createOrders(idProducts, userSession?.token!)
+        console.log(userSession);
+        
+        alert("Compra completada con exito...")
+        setProdcuto([])
+        setTotal(0)
+        localStorage.setItem("cart", "[]")
+        router.push("/orders")
+    }
 
   return (
     <div className='grid grid-cols-2 mt-20 mx-8'>
@@ -38,7 +60,7 @@ const CompCarrito = () => {
                 )
             }
         </div>
-        <div className='justify-self-center self-center bg-blue-400 bg-opacity-50 p-16 rounded-lg shadow-xl'>
+        <div className='justify-self-center self-center bg-blue-400 bg-opacity-50 p-16 rounded-lg shadow-ps'>
             <h2 className=''>Valor Total</h2>
             <p className='text-red-700'>${total}</p>
             <br />
@@ -46,7 +68,7 @@ const CompCarrito = () => {
                 <Link href="/products">Agregar Mas</Link>
             </div>
             <div className='bg-green-400 px-8 py-4 rounded-full hover:scale-105 mt-4 text-center shadow-lg hover:cursor-pointer'>
-                <button>Comprar</button>
+                <button onClick={handleCompra}>Comprar</button>
             </div>
         </div>
     </div>
