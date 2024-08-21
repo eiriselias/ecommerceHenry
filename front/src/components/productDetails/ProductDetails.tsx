@@ -2,7 +2,6 @@
 import IProduct from '@/types/IProduct'
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { IUserSession } from '@/types/ITypes'
 import { useRouter } from 'next/navigation'
