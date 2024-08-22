@@ -130,7 +130,7 @@ const RegistrarseForm = () => {
                         Registrarse
                       </button>
                 </form>
-                <Image className='absolute bottom-16 left-16 hidden lg:block' src="./logoRegistro.svg" width={200} height={200} alt='logo de ingreso'/>
+                <Image className='absolute bottom-16 left-2 hidden lg:block' src="./logoRegistro.svg" width={200} height={200} alt='logo de ingreso'/>
             </div>
         </div>
     </>
