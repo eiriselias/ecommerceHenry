@@ -4,8 +4,7 @@ const APIURL = process.env.NEXT_PUBLIC_API_URL
 
 export async function getProducts (): Promise<IProduct[]> {
     try{
-        console.log(APIURL);
-        
+    
         const res = await fetch(`${APIURL}/products`,{
             next: {revalidate: 1200}
         })

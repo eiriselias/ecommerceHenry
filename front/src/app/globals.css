@@ -25,6 +25,11 @@
     animation-duration: 3s;
     
 }
+.contenedor{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100dvh;
+}
 
 @keyframes ver{
     0%{
