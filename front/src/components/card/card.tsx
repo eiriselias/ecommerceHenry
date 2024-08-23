@@ -16,7 +16,9 @@ const Card: React.FC <IProduct> = ({ name, price, description, image, stock })=>
                 />
             </div>
             <div className="p-4 mt-7">
-                <p className="h-4 scroll-auto">{description}</p>
+                <div className="h-48 overflow-y-scroll">
+                    <p>{description}</p>
+                </div>
                 <div className="flex items-center">
                     <div className="absolute left-4 bottom-1">
                         <p className="font-bold mt-2">precio: {price} </p>

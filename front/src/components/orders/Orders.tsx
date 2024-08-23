@@ -42,7 +42,7 @@ const Orders = () => {
                             <div key={order.id}>
                                 <p>{new Date(order.date).toDateString()}</p>
                                 <p>Estado: {order.status.toLocaleUpperCase()}</p>
-                                <div className='grid grid-cols-4'>
+                                <div className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                                     {
                                         order.products.map((prod)=>{
                                             return(

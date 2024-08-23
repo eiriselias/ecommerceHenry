@@ -52,7 +52,7 @@ const CompCarrito = () => {
     }
 
   return (
-    <div className='grid grid-cols-2 mt-20 mx-8'>
+    <div className='grid grid-row-2 md:grid-cols-2 mt-20 mx-8'>
         <div className='flex flex-col'>
             {
                 producto && producto.length > 0 ? ( producto?.map((produc)=>{
