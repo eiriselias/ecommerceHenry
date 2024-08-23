@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 const CompCarrito = () => {
     
     const [total, setTotal] = useState <number> (0)
-    const [producto, setProdcuto] = useState<IProduct[]>([])
+    const [producto, setProducto] = useState<IProduct[]>([])
     const [userSession, setUserSession] = useState<IUserSession>()
     const router = useRouter()
 
@@ -27,20 +27,28 @@ const CompCarrito = () => {
                 valorTotal = valorTotal + prod.price
             })
             setTotal(valorTotal);
-            setProdcuto(cart)
+            setProducto(cart)
         }
     },[])
 
     const handleCompra = async ()=>{
         const idProducts = producto.map((prod)=> prod.id)
         await createOrders(idProducts, userSession?.token!)
-        console.log(userSession);
         
         alert("Compra completada con exito...")
-        setProdcuto([])
+        setProducto([])
         setTotal(0)
         localStorage.setItem("cart", "[]")
         router.push("/orders")
+    }
+
+    const handleLimpiar = async ()=>{
+        const limpiar = confirm("Realmente desea limpiar el carrito")
+        if(limpiar){
+            setProducto([])
+            setTotal(0)
+            localStorage.setItem("cart","[]")
+        }
     }
 
   return (
@@ -69,6 +77,9 @@ const CompCarrito = () => {
             </div>
             <div className='bg-green-400 px-8 py-4 rounded-full hover:scale-105 mt-4 text-center shadow-lg hover:cursor-pointer'>
                 <button onClick={handleCompra}>Comprar</button>
+            </div>
+            <div className='bg-red-400 px-8 py-4 rounded-full hover:scale-105 mt-4 text-center shadow-lg hover:cursor-pointer'>
+                <button onClick={handleLimpiar}>Limpiar Carrito</button>
             </div>
         </div>
     </div>
