@@ -21,10 +21,18 @@ const Orders = () => {
         setOrders(ordersResponse)
         
     }
+    /* useEffect(()=>{
+        orders && orders.length > 0 ? ( orders?.map((order)=>{
+            order.products.map((prod)=>{
+                valor = valor + prod.price
+            })
+            setTotal(valor);
+        })):(
+            setTotal(0)
+        )
+    },[orders]) */
 
     useEffect(()=>{
-        
-        
         if(userSession?.userData.name){
             userSession.userData.name === undefined ? router.push("/inicio") : fetchData()
         }
@@ -36,21 +44,26 @@ const Orders = () => {
             {
                 
                 orders && orders.length > 0 ? ( orders?.map((order)=>{
-                    
+                    let valor = 0
                     return(
                         <>
                             <div key={order.id}>
                                 <p>{new Date(order.date).toDateString()}</p>
                                 <p>Estado: {order.status.toLocaleUpperCase()}</p>
+                                
                                 <div className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                                     {
                                         order.products.map((prod)=>{
+                                            valor = valor + prod.price
                                             return(
-                                                <MiniCard key={prod.id} {...prod}/>
+                                                 <MiniCard key={prod.id} {...prod}/>
                                             )
                                         })
                                     }
                                 </div>
+                            </div>
+                            <div className="flex flex-col">
+                                <p className='text-red-500 self-end'>Total Compra: ${valor}</p>
                             </div>
                             <hr className='mb-4'/>
                         </>

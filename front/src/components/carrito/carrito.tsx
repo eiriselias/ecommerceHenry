@@ -32,6 +32,7 @@ const CompCarrito = () => {
     },[])
 
     const handleCompra = async ()=>{
+        if(producto.length===0) return alert("El carrito esta vacio")
         const idProducts = producto.map((prod)=> prod.id)
         await createOrders(idProducts, userSession?.token!)
         
@@ -43,6 +44,7 @@ const CompCarrito = () => {
     }
 
     const handleLimpiar = async ()=>{
+        if(producto.length===0) return alert("El carrito esta vacio")
         const limpiar = confirm("Realmente desea limpiar el carrito")
         if(limpiar){
             setProducto([])
@@ -78,7 +80,7 @@ const CompCarrito = () => {
             <div className='bg-green-400 px-8 py-4 rounded-full hover:scale-105 mt-4 text-center shadow-lg hover:cursor-pointer'>
                 <button onClick={handleCompra}>Comprar</button>
             </div>
-            <div className='bg-red-400 px-8 py-4 rounded-full hover:scale-105 mt-4 text-center shadow-lg hover:cursor-pointer'>
+            <div className='bg-red-50 px-8 py-4 rounded-full hover:scale-105 mt-4 text-center shadow-lg hover:cursor-pointer'>
                 <button onClick={handleLimpiar}>Limpiar Carrito</button>
             </div>
         </div>

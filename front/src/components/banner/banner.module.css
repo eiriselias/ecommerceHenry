@@ -1,0 +1,13 @@
+
+@keyframes scroll {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(calc(-300px * 6 - .5rem * 12));
+    }
+}
+
+.animate{
+    animation: scroll 60s linear infinite;
+}
