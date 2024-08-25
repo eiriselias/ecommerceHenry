@@ -15,7 +15,7 @@ export async function createOrders (products:number[], token:string){
         return orders;
         
     } catch (error: any){
-        throw Error("esta ingresando aqui")
+        throw Error(error)
         
     }
     

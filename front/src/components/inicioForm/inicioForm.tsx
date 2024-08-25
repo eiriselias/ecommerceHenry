@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import Swal from "sweetalert2"
 
 const InicioForm = () => {
 
@@ -40,7 +41,14 @@ const InicioForm = () => {
             orders: user.orders
         }
         localStorage.setItem("userSession", JSON.stringify({token, userData: clearUser}))
-        alert("has iniciado seccion");
+        Swal.fire({
+            title:"Inicio Sección",
+            text:"Inicio de sección exitoso",
+            icon:"success",
+            showConfirmButton:false,
+            timer:3000,
+            timerProgressBar:true
+        })
         router.push("/products")
     }
 

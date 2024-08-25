@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { createOrders } from '@/helpers/orders.helpers'
 import { IUserSession } from '@/types/ITypes'
 import { useRouter } from 'next/navigation'
+import Swal from 'sweetalert2'
 
 const CompCarrito = () => {
     
@@ -32,11 +33,25 @@ const CompCarrito = () => {
     },[])
 
     const handleCompra = async ()=>{
-        if(producto.length===0) return alert("El carrito esta vacio")
+        if(producto.length===0) return (
+            Swal.fire({
+                title:"Carrito Vacio",
+                text:"El carrito se encuentra vacio",
+                icon:"warning",
+                showConfirmButton: false,
+                timer:3000,
+                timerProgressBar:true
+            })) 
         const idProducts = producto.map((prod)=> prod.id)
         await createOrders(idProducts, userSession?.token!)
-        
-        alert("Compra completada con exito...")
+        Swal.fire({
+            title:"Compra Exitosa",
+            text:"Compra completada con exito",
+            icon:"success",
+            showConfirmButton:false,
+            timer:3000,
+            timerProgressBar:true
+        })
         setProducto([])
         setTotal(0)
         localStorage.setItem("cart", "[]")
@@ -44,13 +59,29 @@ const CompCarrito = () => {
     }
 
     const handleLimpiar = async ()=>{
-        if(producto.length===0) return alert("El carrito esta vacio")
-        const limpiar = confirm("Realmente desea limpiar el carrito")
-        if(limpiar){
-            setProducto([])
-            setTotal(0)
-            localStorage.setItem("cart","[]")
-        }
+        if(producto.length===0) return  (
+            Swal.fire({
+                title:"Carrito Vacio",
+                text:"El carrito se encuentra vacio",
+                icon:"warning",
+                showConfirmButton: false,
+                timer:3000,
+                timerProgressBar:true
+            })) 
+        Swal.fire({
+            title:"Limpiar El Carrito",
+            text:"Realmente desea limpiar el carrito",
+            icon:"question",
+            showDenyButton:true,
+            denyButtonText:"No",
+            confirmButtonText:"Si"
+        }).then(response=>{
+            if(response.isConfirmed){
+                setProducto([])
+                setTotal(0)
+                localStorage.setItem("cart","[]")  
+            }
+        })
     }
 
   return (

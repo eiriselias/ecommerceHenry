@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { IUserSession } from '@/types/ITypes'
 import { useRouter } from 'next/navigation'
+import Swal from 'sweetalert2'
 
 const ProductDetails = ({id, name, description, price, stock, image, categoryId}: IProduct) => {
   const router = useRouter()
@@ -18,7 +19,14 @@ const ProductDetails = ({id, name, description, price, stock, image, categoryId}
   const handleAdd = ()=>{
 
     if(!userSession?.token){
-      alert("Debe haber un inicio de sección para agregar al carrito");
+      Swal.fire({
+        title:"Sin Inicio De Sección",
+        text:"Debe haber iniciado sección para agregar al carrito",
+        icon:"warning",
+        showConfirmButton:false,
+        timer:3000,
+        timerProgressBar:true
+      })
       router.push("/inicio");
     }else{
       const cart: IProduct[] = JSON.parse(localStorage.getItem("cart") || "[]")
@@ -27,7 +35,14 @@ const ProductDetails = ({id, name, description, price, stock, image, categoryId}
         return false
       })
       if(productExist){
-        alert("Este producto ya existe en tu carro de compras")
+        Swal.fire({
+          title:"Producto Existente",
+          text:"Este producto ya existe en tu carro de compras",
+          icon:"info",
+          showConfirmButton:false,
+          timer:3000,
+          timerProgressBar:true
+        })
         router.push("/carrito")
       }else{
         cart.push({
@@ -41,7 +56,14 @@ const ProductDetails = ({id, name, description, price, stock, image, categoryId}
         })
         
         localStorage.setItem("cart", JSON.stringify(cart))
-        alert("producto agregado con exito")
+        Swal.fire({
+          title:"Producto Agregado",
+          text:"Producto agregado al carro de compras",
+          icon:"success",
+          showConfirmButton:false,
+          timer:3000,
+          timerProgressBar:true
+        })
         router.push("/carrito")
       }
     }
@@ -49,7 +71,7 @@ const ProductDetails = ({id, name, description, price, stock, image, categoryId}
     
   return (
     <div className="flex justify-center">
-      <div className='grid grid-cols-2 mt-28 shadow-lg w-10/12 justify-center h-[80vh] border-t-black border-t-2 border-opacity-10'>
+      <div className='grid grid-cols-2 mt-28 shadow-lg w-10/12 justify-center h-[75vh] border-t-black border-t-2 border-opacity-10'>
         <div className='relative'>
             <Image src={image} alt={name} fill={true} />
         </div>

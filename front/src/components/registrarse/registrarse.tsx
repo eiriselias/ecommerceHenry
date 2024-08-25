@@ -5,6 +5,7 @@ import { IRegisterErrors, IRegisterProps } from '@/types/ITypes';
 import { validateRegisterForm } from '@/helpers/validate';
 import { register } from '@/helpers/auth.helpers';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 const RegistrarseForm = () => {
   const router = useRouter();
@@ -32,7 +33,14 @@ const RegistrarseForm = () => {
   const handelSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
     await register(dataUser)
-    alert("Registro completado correctamente")
+    await Swal.fire({
+      title:"Registro Exitoso",
+      text:"Registro completado correctamente",
+      icon:"success",
+      showConfirmButton:false,
+      timer:3000,
+      timerProgressBar:true
+    })
     router.push("/inicio")
   }
 

@@ -1,4 +1,5 @@
 import { ILoginProps, IRegisterProps } from "@/types/ITypes"
+import Swal from "sweetalert2"
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL
 
@@ -38,12 +39,18 @@ export async function login (userData: ILoginProps){
         if(res.ok){
             return res.json()
         }else{
-            throw Error("usuario o contraseña no concide con usuario registrado")
+            throw Error("usuario o contraseña no coincide con usuario registrado")
         }
 
     } catch (error: any){
-        alert("usuario o contraseña no concide con usuario registrado")
-        
+        Swal.fire({
+            title:"No Coincide",
+            text:"Usuario o contraseña no coincide con usuario registrado",
+            icon:"error",
+            showConfirmButton: false,
+            timer:3000,
+            timerProgressBar:true
+        })
     }
     
 }
