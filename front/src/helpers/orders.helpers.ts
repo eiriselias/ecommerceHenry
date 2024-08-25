@@ -2,7 +2,7 @@ const APIURL = process.env.NEXT_PUBLIC_API_URL
 
 export async function createOrders (products:number[], token:string){
     try{
-        const res = await fetch(`http://localhost:3030/orders`, {
+        const res = await fetch(`${APIURL}/orders`, {
             method:"POST",
             headers:{
                 "Content-type": "application/json",
@@ -23,7 +23,7 @@ export async function createOrders (products:number[], token:string){
 
 export async function getOrders (token:string){
     try{
-        const res = await fetch(`http://localhost:3030/users/orders`, {
+        const res = await fetch(`${APIURL}/users/orders`, {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
