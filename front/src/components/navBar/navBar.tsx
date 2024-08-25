@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import Swal from 'sweetalert2'
 
 
 const NavBar:React.FC = () => {
@@ -19,6 +20,15 @@ const NavBar:React.FC = () => {
   const handleClose = ()=>{
     localStorage.clear()
     setUserSession(undefined)
+    Swal.fire({
+      title:"Sección Finalizada",
+      text:"Gracias por utilizar nuestro servicio, regresa pronto :)",
+      icon:"info",
+      showConfirmButton:false,
+      timer:3000,
+      timerProgressBar:true
+    })
+
   }
 
   return (

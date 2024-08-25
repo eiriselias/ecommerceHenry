@@ -43,7 +43,7 @@ const InicioForm = () => {
         localStorage.setItem("userSession", JSON.stringify({token, userData: clearUser}))
         Swal.fire({
             title:"Inicio Sección",
-            text:"Inicio de sección exitoso",
+            text:`Inicio de sección exitoso, Bienvenido ${user.name}`,
             icon:"success",
             showConfirmButton:false,
             timer:3000,

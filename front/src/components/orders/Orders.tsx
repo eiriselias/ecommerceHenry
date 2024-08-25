@@ -21,16 +21,6 @@ const Orders = () => {
         setOrders(ordersResponse)
         
     }
-    /* useEffect(()=>{
-        orders && orders.length > 0 ? ( orders?.map((order)=>{
-            order.products.map((prod)=>{
-                valor = valor + prod.price
-            })
-            setTotal(valor);
-        })):(
-            setTotal(0)
-        )
-    },[orders]) */
 
     useEffect(()=>{
         if(userSession?.userData.name){
@@ -40,7 +30,9 @@ const Orders = () => {
 
   return (
     <div>
+        
       <div className='flex flex-col mt-32 mx-32'>
+        <h2 className='text-lg text-center'><b>Bienvenido {userSession?.userData.name}</b></h2>
             {
                 
                 orders && orders.length > 0 ? ( orders?.map((order)=>{

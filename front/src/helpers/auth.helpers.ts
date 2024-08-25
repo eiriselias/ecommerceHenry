@@ -6,7 +6,7 @@ const APIURL = process.env.NEXT_PUBLIC_API_URL
 export async function register (userData: IRegisterProps){
     try{
         
-        const res = await fetch(`${APIURL}/users/register`,{
+        const res = await fetch(`http://localhost:3030/users/register`,{
             method: "POST",
             headers:{
                 "Content-type": "application/json"
@@ -29,7 +29,7 @@ export async function register (userData: IRegisterProps){
 export async function login (userData: ILoginProps){
     try{
         
-        const res = await fetch(`${APIURL}/users/login`,{
+        const res = await fetch(`http://localhost:3030/users/login`,{
             method: "POST",
             headers:{
                 "Content-type": "application/json"

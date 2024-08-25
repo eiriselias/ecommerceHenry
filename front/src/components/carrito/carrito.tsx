@@ -102,6 +102,7 @@ const CompCarrito = () => {
             }
         </div>
         <div className='justify-self-center self-center bg-blue-400 bg-opacity-50 p-16 rounded-lg shadow-ps'>
+            <h2 className='text-lg'><b>Carrito de {userSession?.userData.name}</b></h2>
             <h2 className=''>Valor Total</h2>
             <p className='text-red-700'>${total}</p>
             <br />
